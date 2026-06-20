@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+
+{{ group.name }}
+
+</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"></script>
+
+</head>
+
+<body>
+
+<h1>
+
+{{ group.name }}
+
+</h1>
+
+<hr>
+
+<div id="messages">
+
+{% for message in messages %}
+
+<p>
+
+ {{ message.sender }} 
+
+:
+
+{{ message.content }}
+
+</p>
+
+{% endfor %}
+
+</div>
+
+<hr>
+
+<input
+type="text"
+id="message">
+
+<button id="send-btn">
+
+Send
+
+</button>
+
+<script>
+
+const CURRENT_USER =
+"{{ current_user.username }}";
+
+const CURRENT_USER_ID =
+"{{ current_user.id }}";
+
+const GROUP_ID =
+"{{ group.id }}";
+
+</script>
+
+<script src="{{ url_for(
+'static',
+filename='js/group_chat.js'
+) }}">
+</script>
+
+</body>
+
+</html>

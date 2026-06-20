@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Chat</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"></script>
+
+</head>
+
+<body>
+
+<h1>
+
+Chat with {{ receiver.username }}
+
+</h1>
+
+<p id="status">
+
+{% if receiver.status == "online" %}
+
+🟢 Online
+
+{% else %}
+
+Offline
+
+{% endif %}
+
+</p>
+
+<hr>
+
+<div id="messages">
+<p id="typing-status"></p>
+
+{% for message in messages %}
+
+<p>
+
+<b>
+
+{% if message.sender_id == current_user.id %}
+
+You
+
+{% else %}
+
+{{ receiver.username }}
+
+{% endif %}
+
+</b>
+
+:
+
+{{ message.content }}
+
+</p>
+
+{% endfor %}
+
+</div>
+
+<hr>
+
+<input
+type="text"
+id="message">
+
+<button id="send-btn">
+    Send
+</button>
+
+
+</button>
+
+<br><br>
+
+<a href="/dashboard">
+
+Back
+
+</a>
+
+<script>
+
+const CURRENT_USER =
+"{{ current_user.username }}";
+
+const CURRENT_USER_ID =
+"{{ current_user.id }}";
+
+const RECEIVER_ID =
+"{{ receiver.id }}";
+
+</script>
+
+<script src="{{ url_for(
+'static',
+filename='js/chat.js'
+) }}">
+</script>
+
+</body>
+
+</html>
