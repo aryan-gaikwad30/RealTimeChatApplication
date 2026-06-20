@@ -279,19 +279,18 @@ def handle_connect(auth=None):
             f"({active_connections[user_id]} tabs)"
         )
 
-        emit(
-            "user_online",
-            {
-                "user_id": user_id
-            },
-            
-        )
+        socketio.emit(
+    "user_online",
+    {
+        "user_id": user_id
+    }
+)
 
 
 
 
 @socketio.on("disconnect")
-def handle_disconnect():
+def handle_disconnect(reason=None):
 
     if current_user.is_authenticated:
 
@@ -318,17 +317,16 @@ def handle_disconnect():
                 f"{user.username} offline"
             )
 
-            emit(
-                "user_offline",
-                {
-                    "user_id": user_id,
-                    "last_seen":
-                    user.last_seen.strftime(
-                        "%I:%M %p"
-                    )
-                },
-                
-            )
+            socketio.emit(
+    "user_offline",
+    {
+        "user_id": user_id,
+        "last_seen":
+        user.last_seen.strftime(
+            "%I:%M %p"
+        )
+    }
+)
 
 @app.route("/create_group", methods=["GET", "POST"])
 @login_required
@@ -500,7 +498,8 @@ if __name__ == "__main__":
         db.create_all()
 
     socketio.run(
-        app,
-        debug=True,
-        allow_unsafe_werkzeug=True
-    )
+    app,
+    host="0.0.0.0",
+    port=5000,
+    debug=True
+)
