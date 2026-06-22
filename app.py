@@ -544,6 +544,42 @@ def handle_group_message(data):
 
     )
 
+@socketio.on("group_typing")
+def handle_group_typing(data):
+
+    room_name = f"group_{data['group_id']}"
+
+    emit(
+
+        "show_group_typing",
+
+        {
+
+            "user":
+            data["sender"]
+
+        },
+
+        room=room_name,
+
+        include_self=False
+
+    )
+
+@socketio.on("stop_group_typing")
+def handle_stop_group_typing(data):
+
+    room_name = f"group_{data['group_id']}"
+
+    emit(
+
+        "hide_group_typing",
+
+        room=room_name,
+
+        include_self=False
+
+    )
 
 
 

@@ -2,6 +2,7 @@ console.log("group_chat.js loaded");
 
 
 const socket = io();
+let typingTimer;
 
 socket.on(
     "connect",
@@ -66,6 +67,60 @@ document
 
 );
 
+document
+.getElementById(
+    "message"
+)
+.addEventListener(
+
+    "input",
+
+    function ()
+    {
+
+        socket.emit(
+            "group_typing",
+            {
+
+                sender:
+                CURRENT_USER,
+
+                group_id:
+                GROUP_ID
+
+            }
+        );
+
+        clearTimeout(
+            typingTimer
+        );
+
+        typingTimer =
+        setTimeout(
+
+            function ()
+            {
+
+                socket.emit(
+                    "stop_group_typing",
+                    {
+
+                        group_id:
+                        GROUP_ID
+
+                    }
+                );
+
+            },
+
+            1000
+
+        );
+
+    }
+
+);
+
 
 socket.on(
     "receive_group_message",
@@ -89,6 +144,44 @@ socket.on(
             data.message
             +
             "</p>";
+
+    }
+
+);
+
+socket.on(
+
+    "show_group_typing",
+
+    function (data)
+    {
+
+        document
+        .getElementById(
+            "typing-status"
+        )
+        .innerHTML =
+
+        data.user
+        +
+        " is typing...";
+
+    }
+
+);
+
+socket.on(
+
+    "hide_group_typing",
+
+    function ()
+    {
+
+        document
+        .getElementById(
+            "typing-status"
+        )
+        .innerHTML = "";
 
     }
 
