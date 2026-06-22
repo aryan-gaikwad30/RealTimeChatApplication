@@ -1,60 +1,72 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
-    <title>Create Group</title>
-</head>
+{% block content %}
 
-<body>
+<div class="form-card">
 
-<h1>Create Group</h1>
+    <h1>
 
-<form method="POST">
+        Create Group
 
-<input
-type="text"
-name="group_name"
-placeholder="Group Name"
-required>
+    </h1>
 
-<br><br>
-<h3>
+    <form method="POST">
 
-Members
+        <input
+        type="text"
+        name="group_name"
+        placeholder="Group Name"
+        required>
 
-</h3>
+        <div class="member-list">
 
-{% for user in users %}
+            <h3>
 
-<input
-type="checkbox"
-name="members"
-value="{{ user.id }}">
+                Add Members
 
-{{ user.username }}
+            </h3>
 
-<br>
+            <br>
 
-{% endfor %}
+            {% for user in users %}
 
-<br>
+            <div class="member-item">
 
-<button>
+                <label>
 
-Create
+                    <input
+                    type="checkbox"
+                    name="members"
+                    value="{{ user.id }}">
 
-</button>
+                    {{ user.username }}
 
-</form>
+                </label>
 
-<br>
+            </div>
 
-<a href="/dashboard">
+            {% endfor %}
 
-Back
+        </div>
 
-</a>
+        <button
+        class="create-btn"
+        type="submit">
 
-</body>
+            Create Group
 
-</html>
+        </button>
+
+    </form>
+
+    <a
+    class="back-btn"
+    href="/dashboard">
+
+        ← Back to Dashboard
+
+    </a>
+
+</div>
+
+{% endblock %}

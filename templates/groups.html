@@ -1,48 +1,69 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
-<title>
+{% block content %}
 
-Groups
+<div class="groups-container">
 
-</title>
-</head>
+    <div class="group-card">
 
-<body>
+        <h1>
 
-<h1>
+            My Groups
 
-Your Groups
+        </h1>
 
-</h1>
+        <br>
 
-<a href="/create_group">
+        {% for group in groups %}
 
-Create Group
+        <div class="group-row">
 
-</a>
+            <div>
 
-<hr>
+                👥
 
-<ul>
+                {{ group.name }}
 
-{% for group in groups %}
+            </div>
 
-<li>
+            <div>
 
-<a href="/group_chat/{{ group.id }}">
+                <a
+                class="open-chat-btn"
+                href="/group_chat/{{ group.id }}">
 
-{{ group.name }}
+                    Open Chat
 
-</a>
+                </a>
 
-</li>
+            </div>
 
-{% endfor %}
+        </div>
 
-</ul>
+        {% endfor %}
 
-</body>
+    </div>
 
-</html>
+    <div class="group-card">
+
+        <a
+        class="open-chat-btn"
+        href="/create_group">
+
+            + Create Group
+
+        </a>
+
+    </div>
+
+    <a
+    class="back-dashboard"
+    href="/dashboard">
+
+        ← Back to Dashboard
+
+    </a>
+
+</div>
+
+{% endblock %}
