@@ -221,3 +221,59 @@ socket.on(
         }
     }
 );
+
+const picker = new EmojiMart.Picker({
+
+    onEmojiSelect: function (emoji)
+    {
+
+        messageInput.value +=
+        emoji.native;
+
+    }
+
+});
+
+document
+.getElementById(
+    "emoji-picker"
+)
+.appendChild(
+    picker
+);
+
+document
+.getElementById(
+    "emoji-btn"
+)
+.addEventListener(
+
+    "click",
+
+    function ()
+    {
+
+        let pickerBox =
+        document
+        .getElementById(
+            "emoji-picker"
+        );
+
+        if (
+            pickerBox.style.display
+            ===
+            "none"
+        )
+        {
+            pickerBox.style.display =
+            "block";
+        }
+        else
+        {
+            pickerBox.style.display =
+            "none";
+        }
+
+    }
+
+);
