@@ -28,6 +28,25 @@
     <button type="submit">
         Login
     </button>
+    {% if error %}
+
+<p>
+
+{{ error }}
+
+</p>
+
+{% endif %}
+
+<br><br>
+
+Don't have an account?
+
+<a href="/register">
+
+Register
+
+</a>
 
 </form>
 

@@ -35,7 +35,10 @@ def load_user(user_id):
 
 @app.route("/")
 def home():
-    return redirect("/register")
+
+    return render_template(
+        "auth.html"
+    )
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -84,7 +87,10 @@ def login():
 
             return redirect("/dashboard")
 
-        return "Invalid email or password"
+        return render_template(
+            "login.html",
+            error="Invalid email or password"
+        )
 
     return render_template("login.html")
 
