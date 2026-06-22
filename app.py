@@ -418,6 +418,32 @@ def groups():
         groups=groups
     )
 
+@app.route(
+    "/leave_group/<int:group_id>"
+)
+@login_required
+def leave_group(group_id):
+
+    membership = GroupMember.query.filter_by(
+
+        group_id=group_id,
+
+        user_id=current_user.id
+
+    ).first()
+
+    if membership:
+
+        db.session.delete(
+            membership
+        )
+
+        db.session.commit()
+
+    return redirect(
+        "/dashboard"
+    )
+
 @app.route("/group_chat/<int:group_id>")
 @login_required
 def group_chat(group_id):
