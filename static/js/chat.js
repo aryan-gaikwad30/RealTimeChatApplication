@@ -169,11 +169,36 @@ socket.on(
         );
 
         div.innerHTML +=
-            "<p><b>"
-            + data.sender
-            + "</b>: "
-            + data.message
-            + "</p>";
+
+"<p><b>"
++
+data.sender
++
+"</b>: "
++
+
+(
+data.message.includes(
+"giphy.com"
+)
+
+?
+
+'<img src="'
++
+data.message
++
+'" width="200">'
+
+:
+
+data.message
+
+)
+
++
+
+"</p>";
 
     }
 );
@@ -272,6 +297,131 @@ document
         {
             pickerBox.style.display =
             "none";
+        }
+
+    }
+
+);
+
+document
+.getElementById(
+    "gif-btn"
+)
+.addEventListener(
+
+    "click",
+
+    function ()
+    {
+
+        let gifBox =
+        document
+        .getElementById(
+            "gif-box"
+        );
+
+        if (
+            gifBox.style.display
+            ===
+            "none"
+        )
+        {
+            gifBox.style.display =
+            "block";
+        }
+        else
+        {
+            gifBox.style.display =
+            "none";
+        }
+
+    }
+
+);
+
+
+document
+.getElementById(
+    "search-gif"
+)
+.addEventListener(
+
+    "click",
+
+    async function ()
+    {
+
+        let query =
+        document
+        .getElementById(
+            "gif-search"
+        ).value;
+
+        let response =
+        await fetch(
+
+"https://api.giphy.com/v1/gifs/search?api_key=Zt8Ic9FaANW5acUbyFCRCEk3vIUKVdBC&q="
++
+query
++
+"&limit=8"
+
+        );
+
+        let data =
+        await response.json();
+
+        let gifResults =
+        document
+        .getElementById(
+            "gif-results"
+        );
+
+        gifResults.innerHTML = "";
+
+        data.data.forEach(
+
+            function(gif)
+            {
+
+                gifResults.innerHTML +=
+
+                `
+                <img
+                src="${gif.images.fixed_width.url}"
+                width="120"
+                class="gif-image">
+                `;
+
+            }
+
+        );
+
+    }
+
+);
+
+document
+.getElementById(
+    "gif-results"
+)
+.addEventListener(
+
+    "click",
+
+    function(event)
+    {
+
+        if (
+            event.target.tagName
+            ===
+            "IMG"
+        )
+        {
+
+            messageInput.value =
+            event.target.src;
+
         }
 
     }

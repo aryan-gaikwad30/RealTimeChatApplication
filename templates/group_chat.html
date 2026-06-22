@@ -35,7 +35,17 @@
 
 :
 
+{% if "giphy.com" in message.content %}
+
+<img
+src="{{ message.content }}"
+width="200">
+
+{% else %}
+
 {{ message.content }}
+
+{% endif %}
 
 </p>
 
@@ -65,6 +75,37 @@ id="message">
 Send
 
 </button>
+
+<button id="gif-btn">
+
+GIF
+
+</button>
+
+<div
+id="gif-box"
+style="display:none;">
+
+<input
+type="text"
+id="gif-search"
+placeholder="Search GIF">
+
+<button
+id="search-gif">
+
+Search
+
+</button>
+
+<br><br>
+
+<div
+id="gif-results">
+
+</div>
+
+</div>
 
 <script>
 
