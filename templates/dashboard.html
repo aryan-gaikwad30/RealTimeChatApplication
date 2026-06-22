@@ -27,6 +27,42 @@
 
 </ul>
 
+<hr>
+
+<h2>
+
+My Groups
+
+</h2>
+
+<ul>
+
+{% for group in groups %}
+
+<li>
+
+<a href="/group_chat/{{ group.id }}">
+
+{{ group.name }}
+
+</a>
+
+</li>
+
+{% endfor %}
+
+</ul>
+
+<br>
+
+<a href="/create_group">
+
+Create Group
+
+</a>
+
+<br><br>
+
 <br>
 
 <a href="/logout">

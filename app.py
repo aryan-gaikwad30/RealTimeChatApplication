@@ -103,9 +103,23 @@ def dashboard():
         User.id != current_user.id
     ).all()
 
+    memberships = GroupMember.query.filter_by(
+        user_id=current_user.id
+    ).all()
+
+    group_ids = [
+        membership.group_id
+        for membership in memberships
+    ]
+
+    groups = Group.query.filter(
+        Group.id.in_(group_ids)
+    ).all()
+
     return render_template(
         "dashboard.html",
-        users=users
+        users=users,
+        groups=groups
     )
 
 @app.route("/chat/<int:user_id>")
