@@ -1,19 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Dashboard</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-<h1>Welcome {{ current_user.username }}</h1>
+{% block content %}
 
-<h2>Users</h2>
+<div class="dashboard">
 
-<ul>
+<h1>
+
+Welcome {{ current_user.username }}
+
+</h1>
+
+<br>
+
+<div class="card">
+
+<h2>
+
+Users
+
+</h2>
 
 {% for user in users %}
 
-<li>
+<div class="user-item">
 
 <a href="/chat/{{ user.id }}">
 
@@ -21,13 +30,13 @@
 
 </a>
 
-</li>
+</div>
 
 {% endfor %}
 
-</ul>
+</div>
 
-<hr>
+<div class="card">
 
 <h2>
 
@@ -35,11 +44,9 @@ My Groups
 
 </h2>
 
-<ul>
-
 {% for group in groups %}
 
-<li>
+<div class="group-item">
 
 <a href="/group_chat/{{ group.id }}">
 
@@ -55,13 +62,13 @@ Leave
 
 </a>
 
-</li>
+</div>
 
 {% endfor %}
 
-</ul>
+</div>
 
-<br>
+<div class="card">
 
 <a href="/create_group">
 
@@ -69,15 +76,20 @@ Create Group
 
 </a>
 
-<br><br>
+</div>
 
 <br>
 
 <a href="/logout">
 
+<button class="logout-btn">
+
 Logout
+
+</button>
 
 </a>
 
-</body>
-</html>
+</div>
+
+{% endblock %}

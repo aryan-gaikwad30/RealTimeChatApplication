@@ -3,139 +3,160 @@
 
 <head>
 
-<title>Chat</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/emoji-mart@latest/dist/browser.js"></script>
+    <title>Chat</title>
+
+    <link
+    rel="stylesheet"
+    href="{{ url_for(
+    'static',
+    filename='css/style.css'
+    ) }}">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/emoji-mart@latest/dist/browser.js"></script>
 
 </head>
 
 <body>
 
-<h1>
+<div class="chat-container">
 
-Chat with {{ receiver.username }}
+    <div class="chat-header">
 
-</h1>
+        <h1>
 
-<p id="status">
+            {{ receiver.username }}
 
-{% if receiver.status == "online" %}
+        </h1>
 
-🟢 Online
+        <p id="status">
 
-{% else %}
+        {% if receiver.status == "online" %}
 
-Offline
+            🟢 Online
 
-{% endif %}
+        {% else %}
 
-</p>
+            Offline
 
-<hr>
+        {% endif %}
 
-<div id="messages">
-<p id="typing-status"></p>
+        </p>
 
-{% for message in messages %}
+    </div>
 
-<p>
+    <div
+    class="messages-box"
+    id="messages">
 
-<b>
+        <p id="typing-status"></p>
 
-{% if message.sender_id == current_user.id %}
+        {% for message in messages %}
 
-You
+        <p>
 
-{% else %}
+            <b>
 
-{{ receiver.username }}
+            {% if message.sender_id == current_user.id %}
 
-{% endif %}
+                You
 
-</b>
+            {% else %}
 
-:
+                {{ receiver.username }}
 
-{% if "giphy.com" in message.content %}
+            {% endif %}
 
-<img
-src="{{ message.content }}"
-width="200">
+            </b>
 
-{% else %}
+            :
 
-{{ message.content }}
+            {% if "giphy.com" in message.content %}
 
-{% endif %}
+            <img
+            src="{{ message.content }}"
+            width="200">
 
-</p>
+            {% else %}
 
-{% endfor %}
+            {{ message.content }}
+
+            {% endif %}
+
+        </p>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="input-box">
+
+        <button id="emoji-btn">
+
+            😀
+
+        </button>
+
+        <button id="gif-btn">
+
+            GIF
+
+        </button>
+
+        <input
+        type="text"
+        id="message">
+
+        <button id="send-btn">
+
+            Send
+
+        </button>
+
+        <div
+        id="emoji-picker"
+        style="display:none;">
+        </div>
+
+        <div
+        id="gif-box"
+        style="display:none;">
+
+            <input
+            type="text"
+            id="gif-search"
+            placeholder="Search GIF">
+
+            <button
+            id="search-gif">
+
+                Search
+
+            </button>
+
+            <br><br>
+
+            <div
+            id="gif-results">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <a href="/dashboard">
+
+        Back
+
+    </a>
 
 </div>
 
-<hr>
-
-<button id="emoji-btn">
-
-😀
-
-</button>
-
-<div
-id="emoji-picker"
-style="display:none;">
-</div>
-
-<input
-type="text"
-id="message">
-
-<button id="send-btn">
-    Send
-</button>
-
-<button id="gif-btn">
-
-GIF
-
-</button>
-
-<div
-id="gif-box"
-style="display:none;">
-
-<input
-type="text"
-id="gif-search"
-placeholder="Search GIF">
-
-<button
-id="search-gif">
-
-Search
-
-</button>
-
-<br><br>
-
-<div
-id="gif-results">
-
-</div>
-
-</div>
-
-
-</button>
-
-<br><br>
-
-<a href="/dashboard">
-
-Back
-
-</a>
+<!-- IMPORTANT: JS goes at bottom -->
 
 <script>
 
@@ -153,8 +174,7 @@ const RECEIVER_ID =
 <script src="{{ url_for(
 'static',
 filename='js/chat.js'
-) }}">
-</script>
+) }}"></script>
 
 </body>
 
