@@ -157,9 +157,10 @@ document
 
 
 socket.on(
+
     "receive_message",
 
-    function (data)
+    function(data)
     {
 
         let div =
@@ -168,39 +169,57 @@ socket.on(
             "messages"
         );
 
+        let side;
+
+        if (
+            parseInt(
+                data.sender_id
+            )
+            ===
+            parseInt(
+                CURRENT_USER_ID
+            )
+        )
+        {
+            side = "sent";
+        }
+        else
+        {
+            side = "received";
+        }
+
         div.innerHTML +=
 
-"<p><b>"
-+
-data.sender
-+
-"</b>: "
-+
+        `
+        <div class="message ${side}">
 
-(
-data.message.includes(
-"giphy.com"
-)
+            <div class="bubble">
 
-?
+                ${
+                data.message.includes(
+                    "giphy.com"
+                )
 
-'<img src="'
-+
-data.message
-+
-'" width="200">'
+                ?
 
-:
+                `<img src="${data.message}" width="200">`
 
-data.message
+                :
 
-)
+                data.message
 
-+
+                }
 
-"</p>";
+            </div>
+
+        </div>
+        `;
+
+        div.scrollTop =
+        div.scrollHeight;
 
     }
+
 );
 
 socket.on(

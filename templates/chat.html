@@ -54,37 +54,51 @@
 
         {% for message in messages %}
 
-        <p>
-
-            <b>
-
             {% if message.sender_id == current_user.id %}
 
-                You
+            <div class="message sent">
+
+                <div class="bubble">
+
+                    {% if "giphy.com" in message.content %}
+
+                    <img
+                    src="{{ message.content }}"
+                    width="200">
+
+                    {% else %}
+
+                    {{ message.content }}
+
+                    {% endif %}
+
+                </div>
+
+            </div>
 
             {% else %}
 
-                {{ receiver.username }}
+            <div class="message received">
+
+                <div class="bubble">
+
+                    {% if "giphy.com" in message.content %}
+
+                    <img
+                    src="{{ message.content }}"
+                    width="200">
+
+                    {% else %}
+
+                    {{ message.content }}
+
+                    {% endif %}
+
+                </div>
+
+            </div>
 
             {% endif %}
-
-            </b>
-
-            :
-
-            {% if "giphy.com" in message.content %}
-
-            <img
-            src="{{ message.content }}"
-            width="200">
-
-            {% else %}
-
-            {{ message.content }}
-
-            {% endif %}
-
-        </p>
 
         {% endfor %}
 
@@ -106,7 +120,8 @@
 
         <input
         type="text"
-        id="message">
+        id="message"
+        placeholder="Type a message...">
 
         <button id="send-btn">
 
@@ -155,8 +170,6 @@
     </a>
 
 </div>
-
-<!-- IMPORTANT: JS goes at bottom -->
 
 <script>
 

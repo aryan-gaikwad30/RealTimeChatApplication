@@ -190,13 +190,19 @@ def handle_send_message(data):
 
     
     emit(
-        "receive_message",
-        {
-            "sender": data["sender"],
-            "message": content
-        },
-        room=room_name
-    )
+    "receive_message",
+    {
+        "sender": data["sender"],
+
+        "sender_id":
+        sender_id,
+
+        "message":
+        content
+    },
+
+    room=room_name
+)
 
 @app.route("/logout")
 @login_required
