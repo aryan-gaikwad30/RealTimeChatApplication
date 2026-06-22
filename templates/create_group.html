@@ -18,6 +18,26 @@ placeholder="Group Name"
 required>
 
 <br><br>
+<h3>
+
+Members
+
+</h3>
+
+{% for user in users %}
+
+<input
+type="checkbox"
+name="members"
+value="{{ user.id }}">
+
+{{ user.username }}
+
+<br>
+
+{% endfor %}
+
+<br>
 
 <button>
 

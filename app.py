@@ -341,7 +341,8 @@ def create_group():
     if request.method == "POST":
 
         group_name = request.form["group_name"]
-
+        selected_members = request.form.getlist("members")
+  
         new_group = Group(
             name=group_name
         )
@@ -357,19 +358,27 @@ def create_group():
             user_id=current_user.id
         )
 
-        db.session.add(
-            creator
-        )
+        db.session.add(creator)
+
+        for user_id in selected_members:
+            member = GroupMember(
+                group_id=new_group.id,
+                user_id=int(user_id)
+            )
+            db.session.add(member)
 
         db.session.commit()
 
-        return redirect(
-            "/groups"
-        )
+        return redirect("/groups")
+
+    users = User.query.filter(
+        User.id != current_user.id
+     ).all()
 
     return render_template(
-        "create_group.html"
-    )
+    "create_group.html",
+    users=users
+    )   
 
 @app.route("/groups")
 @login_required
