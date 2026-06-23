@@ -457,6 +457,9 @@ def group_chat(group_id):
     group = Group.query.get_or_404(
         group_id
     )
+    member_count = GroupMember.query.filter_by(
+    group_id=group_id
+    ).count()
 
     messages = GroupMessage.query.filter_by(
         group_id=group_id
@@ -472,16 +475,23 @@ def group_chat(group_id):
         )
 
         message_data.append(
-            {
-                "sender": sender.username,
-                "content": msg.content
-            }
-        )
+        {
+            "sender": sender.username,
+
+            "content": msg.content,
+
+            "timestamp":
+            msg.timestamp.strftime(
+                 "%I:%M %p"
+            )
+        }
+    )
 
     return render_template(
         "group_chat.html",
         group=group,
-        messages=message_data
+        messages=message_data,
+        member_count=member_count
     )
 
 @socketio.on("join_group")

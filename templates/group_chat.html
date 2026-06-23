@@ -36,7 +36,7 @@
 
         <p>
 
-            👥 Group Chat
+        👥 {{ member_count }} Members
 
         </p>
 
@@ -65,6 +65,13 @@
                     {% else %}
 
                     {{ message.content }}
+                    <br>
+
+<small>
+
+{{ message.timestamp }}
+
+</small>
 
                     {% endif %}
 

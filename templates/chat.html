@@ -69,7 +69,13 @@
                     {% else %}
 
                     {{ message.content }}
+                    <br>
 
+                    <small>
+
+                        {{ message.timestamp.strftime("%I:%M %p") }}
+
+                    </small>    
                     {% endif %}
 
                 </div>
