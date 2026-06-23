@@ -128,29 +128,22 @@ input{
 
 .input-box{
 
-    position:sticky;
+    display:flex;
 
-    bottom:0;
+    gap:10px;
 
-    background:white;
+    align-items:center;
 
-    padding:20px;
-
-    border-radius:15px;
-
-    box-shadow:0px -2px 10px rgba(0,0,0,0.1);
-
-    margin-top:20px;
+    flex-wrap:wrap;
 
 }
-
 .input-box input{
-    width:50%;
-    padding:12px;
-    border:1px solid #ddd;
-    border-radius:10px;
-}
 
+    flex:1;
+
+    min-width:150px;
+
+}
 .input-box button{
     padding:12px 18px;
     border-radius:10px;
@@ -516,5 +509,112 @@ small{
     font-size:12px;
 
     opacity:0.7;
+
+}
+/* ============================= */
+/* Mobile Responsive */
+/* ============================= */
+
+@media screen and (max-width:768px){
+
+    .chat-container,
+    .dashboard,
+    .groups-container,
+    .form-card{
+
+        width:95%;
+
+        margin:auto;
+
+    }
+
+    .messages-box{
+
+        height:55vh;
+
+    }
+
+    .message{
+
+        margin-bottom:15px;
+
+    }
+
+    .bubble{
+
+        max-width:80%;
+
+        font-size:14px;
+
+    }
+
+    .input-box{
+
+        display:flex;
+
+        flex-wrap:wrap;
+
+        gap:10px;
+
+        align-items:center;
+
+    }
+
+    .input-box input{
+
+        width:100%;
+
+        order:1;
+
+    }
+
+    #emoji-btn{
+
+        order:2;
+
+    }
+
+    #gif-btn{
+
+        order:3;
+
+    }
+
+    #send-btn{
+
+        order:4;
+
+        flex:1;
+
+    }
+
+    button{
+
+        padding:10px 15px;
+
+    }
+
+}
+@media screen and (max-width:480px){
+
+    .bubble{
+
+        max-width:95%;
+
+        font-size:13px;
+
+    }
+
+    .messages-box{
+
+        height:55vh;
+
+    }
+
+    .chat-header h1{
+
+        font-size:20px;
+
+    }
 
 }
