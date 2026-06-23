@@ -109,13 +109,21 @@ input{
 }
 
 .messages-box{
+
     background:white;
+
     height:500px;
+
     overflow-y:auto;
+
     margin-top:20px;
+
     padding:20px;
+
     border-radius:15px;
+
     box-shadow:0px 0px 10px rgba(0,0,0,0.1);
+
 }
 
 .input-box{
@@ -155,9 +163,10 @@ input{
 
 .bubble{
     max-width:70%;
-    padding:12px 18px;
-    border-radius:18px;
+    padding:14px 18px;
+    border-radius:20px;
     word-wrap:break-word;
+    line-height:1.5;
 }
 
 .sent .bubble{
@@ -286,4 +295,55 @@ input{
 .back-dashboard{
     display:inline-block;
     margin-top:20px;
+}
+
+#typing-status{
+    color:gray;
+    font-style:italic;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+button{
+
+    transition:0.3s;
+
+}
+
+button:hover{
+
+    opacity:0.8;
+
+}
+
+#gif-results{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(
+        2,
+        1fr
+    );
+
+    gap:10px;
+
+    margin-top:20px;
+
+}
+#gif-results img{
+
+    width:100%;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+}
+#emoji-picker{
+
+    position:absolute;
+
+    z-index:100;
+
 }

@@ -446,3 +446,11 @@ document
     }
 
 );
+
+let messagesBox =
+document.getElementById(
+    "messages"
+);
+
+messagesBox.scrollTop =
+messagesBox.scrollHeight;
