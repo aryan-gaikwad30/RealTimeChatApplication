@@ -214,6 +214,19 @@ socket.on(
 
         </div>
         `;
+        div.scrollTo(
+
+    {
+
+        top:
+        div.scrollHeight,
+
+        behavior:
+        "smooth"
+
+    }
+
+);
 
         div.scrollTop =
         div.scrollHeight;
@@ -454,3 +467,4 @@ document.getElementById(
 
 messagesBox.scrollTop =
 messagesBox.scrollHeight;
+
