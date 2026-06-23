@@ -3,107 +3,177 @@
 
 <head>
 
-<title>
+    <title>
 
-{{ group.name }}
+        {{ group.name }}
 
-</title>
+    </title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/emoji-mart@latest/dist/browser.js"></script>
+    <link
+    rel="stylesheet"
+    href="{{ url_for(
+    'static',
+    filename='css/style.css'
+    ) }}">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/emoji-mart@latest/dist/browser.js"></script>
 
 </head>
 
 <body>
 
-<h1>
+<div class="chat-container">
 
-{{ group.name }}
+    <div class="chat-header">
 
-</h1>
+        <h1>
 
-<hr>
+            {{ group.name }}
 
-<div id="messages">
-<p id="typing-status"></p>
+        </h1>
 
-{% for message in messages %}
+        <p>
 
-<p>
+            👥 Group Chat
 
- {{ message.sender }} 
+        </p>
 
-:
+    </div>
 
-{% if "giphy.com" in message.content %}
+    <div
+    class="messages-box"
+    id="messages">
 
-<img
-src="{{ message.content }}"
-width="200">
+        <p id="typing-status"></p>
 
-{% else %}
+        {% for message in messages %}
 
-{{ message.content }}
+            {% if message.sender == current_user.username %}
 
-{% endif %}
+            <div class="message sent">
 
-</p>
+                <div class="bubble">
 
-{% endfor %}
+                    {% if "giphy.com" in message.content %}
 
-</div>
+                    <img
+                    src="{{ message.content }}"
+                    width="200">
 
-<hr>
+                    {% else %}
 
-<button id="emoji-btn">
+                    {{ message.content }}
 
-😀
+                    {% endif %}
 
-</button>
+                </div>
 
-<div
-id="emoji-picker"
-style="display:none;">
-</div>
+            </div>
 
-<input
-type="text"
-id="message">
+            {% else %}
 
-<button id="send-btn">
+            <div class="message received">
 
-Send
+                <div>
 
-</button>
+                    <b>
 
-<button id="gif-btn">
+                        {{ message.sender }}
 
-GIF
+                    </b>
 
-</button>
+                    <div class="bubble">
 
-<div
-id="gif-box"
-style="display:none;">
+                        {% if "giphy.com" in message.content %}
 
-<input
-type="text"
-id="gif-search"
-placeholder="Search GIF">
+                        <img
+                        src="{{ message.content }}"
+                        width="200">
 
-<button
-id="search-gif">
+                        {% else %}
 
-Search
+                        {{ message.content }}
 
-</button>
+                        {% endif %}
 
-<br><br>
+                    </div>
 
-<div
-id="gif-results">
+                </div>
 
-</div>
+            </div>
+
+            {% endif %}
+
+        {% endfor %}
+
+    </div>
+
+    <div class="input-box">
+
+        <button id="emoji-btn">
+
+            😀
+
+        </button>
+
+        <button id="gif-btn">
+
+            GIF
+
+        </button>
+
+        <input
+        type="text"
+        id="message"
+        placeholder="Type a message...">
+
+        <button id="send-btn">
+
+            Send
+
+        </button>
+
+        <div
+        id="emoji-picker"
+        style="display:none;">
+        </div>
+
+        <div
+        id="gif-box"
+        style="display:none;">
+
+            <input
+            type="text"
+            id="gif-search"
+            placeholder="Search GIF">
+
+            <button
+            id="search-gif">
+
+                Search
+
+            </button>
+
+            <br><br>
+
+            <div
+            id="gif-results">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <a href="/groups">
+
+        Back
+
+    </a>
 
 </div>
 
@@ -123,8 +193,7 @@ const GROUP_ID =
 <script src="{{ url_for(
 'static',
 filename='js/group_chat.js'
-) }}">
-</script>
+) }}"></script>
 
 </body>
 

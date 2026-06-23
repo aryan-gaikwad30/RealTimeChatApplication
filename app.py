@@ -534,21 +534,24 @@ def handle_group_message(data):
 
     emit(
 
-        "receive_group_message",
+    "receive_group_message",
 
-        {
+    {
 
-            "sender":
-            data["sender"],
+        "sender":
+        data["sender"],
 
-            "message":
-            data["message"]
+        "sender_id":
+        data["sender_id"],
 
-        },
+        "message":
+        data["message"]
 
-        room=room_name
+    },
 
-    )
+    room=room_name
+
+)
 
 @socketio.on("group_typing")
 def handle_group_typing(data):

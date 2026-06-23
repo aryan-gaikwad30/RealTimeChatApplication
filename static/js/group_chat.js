@@ -123,6 +123,7 @@ document
 
 
 socket.on(
+
     "receive_group_message",
 
     function (data)
@@ -134,37 +135,122 @@ socket.on(
             "messages"
         );
 
+        let side;
+
+        if (
+            parseInt(
+                data.sender_id
+            )
+            ===
+            parseInt(
+                CURRENT_USER_ID
+            )
+        )
+        {
+            side = "sent";
+        }
+        else
+        {
+            side = "received";
+        }
+
+        let html;
+
+        if (
+            side
+            ===
+            "sent"
+        )
+        {
+
+            html =
+
+            `
+            <div class="message sent">
+
+                <div class="bubble">
+
+                    ${
+                    data.message.includes(
+                        "giphy.com"
+                    )
+
+                    ?
+
+                    `<img src="${data.message}" width="200">`
+
+                    :
+
+                    data.message
+
+                    }
+
+                </div>
+
+            </div>
+            `;
+
+        }
+
+        else
+
+        {
+
+            html =
+
+            `
+            <div class="message received">
+
+                <div>
+
+                    <b>
+
+                        ${data.sender}
+
+                    </b>
+
+                    <div class="bubble">
+
+                        ${
+                        data.message.includes(
+                            "giphy.com"
+                        )
+
+                        ?
+
+                        `<img src="${data.message}" width="200">`
+
+                        :
+
+                        data.message
+
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+            `;
+
+        }
+
         div.innerHTML +=
+        html;
 
-"<p><b>"
-+
-data.sender
-+
-"</b>: "
-+
+        div.scrollTo(
 
-(
-data.message.includes(
-"giphy.com"
-)
+            {
 
-?
+                top:
+                div.scrollHeight,
 
-'<img src="'
-+
-data.message
-+
-'" width="200">'
+                behavior:
+                "smooth"
 
-:
+            }
 
-data.message
-
-)
-
-+
-
-"</p>";
+        );
 
     }
 
@@ -396,3 +482,11 @@ document
     }
 
 );
+let messagesBox =
+document
+.getElementById(
+    "messages"
+);
+
+messagesBox.scrollTop =
+messagesBox.scrollHeight;
