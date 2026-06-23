@@ -319,16 +319,27 @@ input{
 
 button{
 
-    transition:0.3s;
+    transition:
+
+    0.3s;
+
+    border:none;
+
+    cursor:pointer;
 
 }
 
 button:hover{
 
-    opacity:0.8;
+    opacity:0.85;
+
+    transform:
+
+    translateY(
+        -2px
+    );
 
 }
-
 #gif-results{
 
     display:grid;
@@ -345,9 +356,24 @@ button:hover{
     margin-top:20px;
 
 }
-#gif-results img:hover{
+#gif-results{
 
-    transform:scale(1.05);
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(
+        2,
+        1fr
+    );
+
+    gap:10px;
+
+    max-height:300px;
+
+    overflow-y:auto;
+
+    margin-top:20px;
 
 }
 #emoji-picker{
@@ -373,12 +399,42 @@ button:hover{
 
 .card:hover,
 .chat-header:hover,
-.messages-box:hover,
-.input-box:hover{
+.messages-box:hover{
 
-    transform:translateY(-2px);
+    transform:
+
+    translateY(
+        -2px
+    );
 
     transition:0.3s;
+
+}
+.input-box{
+
+    position:sticky;
+
+    bottom:0;
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    box-shadow:
+
+    0px -2px 15px
+    rgba(
+        0,
+        0,
+        0,
+        0.1
+    );
+
+    margin-top:20px;
+
+    z-index:10;
 
 }
 .bubble{
@@ -389,5 +445,65 @@ button:hover{
 .bubble:hover{
 
     transform:scale(1.02);
+
+}
+.bubble{
+
+    transition:0.3s;
+
+}
+.bubble:hover{
+
+    transform:
+
+    scale(
+        1.02
+    );
+
+}
+#gif-box{
+
+    margin-top:20px;
+
+}
+#gif-results img{
+
+    width:100%;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+}
+#gif-results img:hover{
+
+    transform:
+
+    scale(
+        1.05
+    );
+
+}
+.back-btn{
+
+    display:inline-block;
+
+    margin-top:20px;
+
+}
+.messages-box::-webkit-scrollbar{
+
+    width:8px;
+
+}
+.messages-box::-webkit-scrollbar-thumb{
+
+    background:
+
+    #cccccc;
+
+    border-radius:10px;
 
 }
